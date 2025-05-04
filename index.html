@@ -43,6 +43,7 @@
             /* 平滑过渡 */
             opacity: 1;
             transition: opacity 0.3s ease;
+            cursor: zoom-in; /* 确保鼠标显示为放大镜样式 */
         }
         
         /* 折叠面板样式 */
@@ -97,7 +98,13 @@
             background-color: rgba(0, 0, 0, 0.9);
             z-index: 1050;
             overflow: auto;
-            padding: 10px;
+            padding: 0;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+        
+        .image-viewer.active {
+            opacity: 1;
         }
         
         .image-viewer img {
@@ -106,6 +113,12 @@
             max-height: 90vh;
             margin: 30px auto;
             object-fit: contain;
+            transition: transform 0.3s ease;
+            transform: scale(0.95);
+        }
+        
+        .image-viewer.active img {
+            transform: scale(1);
         }
         
         .close-viewer {
@@ -116,6 +129,18 @@
             font-size: 30px;
             cursor: pointer;
             z-index: 1060;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+        
+        .close-viewer:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
         
         /* 可点击图片样式 */
@@ -196,8 +221,8 @@
             font-weight: bold;
             margin-bottom: 15px;
             color: #ff4d4f;
-            padding: 8px 5px;
-            border-radius: 4px;
+            padding: 12px 10px;
+            border-radius: 6px;
             background-color: #fff1f0;
             border: 1px dashed #ffccc7;
             animation: pulse 1.5s infinite;
@@ -251,7 +276,7 @@
         .alert-warning-custom {
             background-color: #fff4e5;
             color: #d46b08;
-            padding: 10px 15px;
+            padding: 12px 15px;
             border-radius: 6px;
             border: 1px dashed #ffbb96;
             margin: 15px auto;
@@ -259,6 +284,7 @@
             position: relative;
             animation: attention 2s infinite;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(212, 107, 8, 0.1);
         }
         
         @keyframes attention {
@@ -422,8 +448,8 @@
             <!-- 验证码提示 -->
             <div class="alert-warning-custom">
                 <i class="bi bi-exclamation-triangle-fill"></i>
-                弹出要求验证码就直接换其他ID！<br>
-                换ID后搜不到重启AppStore即可
+                <div>弹出要求验证码就直接换其他ID！</div>
+                <div>换ID后搜不到重启AppStore即可</div>
             </div>
             
             <div class="col-auto text-center w-100">
@@ -462,7 +488,10 @@
                 <img class="wechat-qr" src="https://tgimg.langtest.online/file/1746167084350_7bd780d16a27bfb4d50cd2ee95e4f60.jpg" alt="微信二维码">
                 <p>或微信搜索添加:</p>
                 <div class="wechat-id" id="wechatId">_qiyue0907</div>
-                <button class="copy-btn" id="copyWechat">复制微信号</button>
+                <button class="copy-btn" id="copyWechat">
+                    <i class="bi bi-clipboard"></i> 复制微信号
+                </button>
+                <p class="mt-3 small text-muted">添加微信咨询：软件使用、网络问题、加速服务</p>
             </div>
         </div>
         
@@ -475,6 +504,7 @@
                 <div class="force-modal-title">重要安全提示</div>
                 <div class="force-modal-message">
                     <strong>禁止在设置中登录，登录教程请看图片</strong>
+                    <p class="mb-0 mt-2 small">请严格遵循安装步骤，确保正常使用</p>
                 </div>
                 <div class="force-modal-timer">
                     <i class="bi bi-clock"></i>请等待<span id="countdown">3</span>秒
@@ -551,22 +581,42 @@
             // 点击图片时打开查看器
             tutorialImg.on('click', function() {
                 viewerImage.attr('src', $(this).attr('src'));
-                imageViewer.fadeIn();
+                imageViewer.css('display', 'block');
+                
+                // 添加平滑过渡效果
+                setTimeout(function() {
+                    imageViewer.addClass('active');
+                }, 10);
+                
                 $('body').css('overflow', 'hidden'); // 防止背景滚动
             });
             
             // 点击关闭按钮或背景关闭查看器
             closeViewer.on('click', function() {
-                imageViewer.fadeOut();
-                $('body').css('overflow', '');
+                closeImageViewer();
             });
             
             imageViewer.on('click', function(e) {
                 if (e.target === this) {
-                    imageViewer.fadeOut();
-                    $('body').css('overflow', '');
+                    closeImageViewer();
                 }
             });
+            
+            // 添加键盘Esc关闭功能
+            $(document).on('keydown', function(e) {
+                if (e.key === 'Escape' && imageViewer.is(':visible')) {
+                    closeImageViewer();
+                }
+            });
+            
+            // 关闭图片查看器函数
+            function closeImageViewer() {
+                imageViewer.removeClass('active');
+                setTimeout(function() {
+                    imageViewer.css('display', 'none');
+                    $('body').css('overflow', '');
+                }, 300);
+            }
             
             // 微信引流功能
             const wechatModal = $("#wechatModal");
@@ -577,19 +627,19 @@
             
             // 显示微信弹窗
             showWechat.on('click', function() {
-                wechatModal.fadeIn();
+                wechatModal.fadeIn(300);
                 $('body').css('overflow', 'hidden');
             });
             
             // 关闭微信弹窗
             closeWechat.on('click', function() {
-                wechatModal.fadeOut();
+                wechatModal.fadeOut(300);
                 $('body').css('overflow', '');
             });
             
             wechatModal.on('click', function(e) {
                 if (e.target === this) {
-                    wechatModal.fadeOut();
+                    wechatModal.fadeOut(300);
                     $('body').css('overflow', '');
                 }
             });
@@ -603,8 +653,14 @@
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
                 
-                // 显示复制成功提示
-                swal("复制成功", "微信号已复制到剪贴板", "success");
+                // 显示复制成功提示，增强反馈
+                swal({
+                    title: "复制成功!",
+                    text: "微信号已复制到剪贴板",
+                    icon: "success",
+                    buttons: false,
+                    timer: 1500
+                });
             });
             
             // 强制弹窗功能
