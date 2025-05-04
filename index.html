@@ -98,8 +98,6 @@
             z-index: 1050;
             overflow: auto;
             padding: 10px;
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.3s ease;
         }
         
         .image-viewer img {
@@ -108,18 +106,6 @@
             max-height: 90vh;
             margin: 30px auto;
             object-fit: contain;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-            border-radius: 4px;
-            opacity: 0;
-            transform: scale(0.9);
-            animation: imgAppear 0.4s ease forwards;
-        }
-        
-        @keyframes imgAppear {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
         }
         
         .close-viewer {
@@ -130,65 +116,11 @@
             font-size: 30px;
             cursor: pointer;
             z-index: 1060;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-        
-        .close-viewer:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-        }
-        
-        /* 缩放控制 */
-        .zoom-controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 30px;
-            padding: 8px 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            opacity: 0;
-            animation: fadeIn 0.5s ease 0.3s forwards;
-        }
-        
-        .zoom-btn {
-            color: white;
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.2s ease;
-        }
-        
-        .zoom-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
         }
         
         /* 可点击图片样式 */
         .tutorial-img {
             cursor: zoom-in;
-            transition: all 0.2s ease;
-        }
-        
-        .tutorial-img:hover {
-            transform: scale(1.01);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
         
         /* 引流链接样式 */
@@ -229,6 +161,7 @@
             overflow-y: auto; /* 添加滚动条 */
             padding: 0 10px;
             backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
         }
         
         .wechat-content {
@@ -239,49 +172,50 @@
             max-width: 350px;
             position: relative;
             width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: modalFadeIn 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            animation: scaleIn 0.4s ease;
+            transform: translateZ(0);
         }
         
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
         
         .wechat-qr {
             width: auto;
             max-width: 100%;
             max-height: 65vh; /* 使用视口高度作为参考 */
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
             object-fit: contain;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease 0.1s both;
         }
         
         .wechat-qr:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
         .wechat-close {
             position: absolute;
-            top: 10px;
+            top: 15px;
             right: 15px;
             font-size: 24px;
             cursor: pointer;
-            color: #666;
-            transition: all 0.2s ease;
-            width: 30px;
             height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
             border-radius: 50%;
+            transition: all 0.2s ease;
+            z-index: 10;
         }
         
         .wechat-close:hover {
-            background-color: rgba(0,0,0,0.05);
-            color: #333;
+            background-color: rgba(0,0,0,0.1);
             transform: rotate(90deg);
         }
         
@@ -291,37 +225,14 @@
             font-weight: bold;
             margin-bottom: 20px;
             color: #ff4d4f;
-            padding: 12px 10px;
+            padding: 12px 15px;
             border-radius: 8px;
             background-color: #fff1f0;
             border: 1px dashed #ffccc7;
             animation: pulse 1.5s infinite;
             white-space: normal; /* 允许文本换行 */
             line-height: 1.4;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .wechat-title::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(
-                90deg, 
-                rgba(255,255,255,0) 0%, 
-                rgba(255,255,255,0.3) 50%, 
-                rgba(255,255,255,0) 100%
-            );
-            animation: shimmer 2s infinite;
-            transform: skewX(-25deg);
-        }
-        
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 200%; }
+            box-shadow: 0 4px 12px rgba(255, 77, 79, 0.2);
         }
         
         @keyframes pulse {
@@ -331,58 +242,124 @@
         }
         
         .wechat-id {
-            background-color: #f6f6f6;
+            background: linear-gradient(145deg, #f1f1f1, #e6e6e6);
             padding: 12px 15px;
             border-radius: 8px;
             font-weight: bold;
-            margin: 15px auto;
-            border: 1px solid #eee;
+            margin: 0 auto 20px;
+            border: none;
+            max-width: 80%;
             font-size: 16px;
-            color: #333;
-            display: inline-block;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             position: relative;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .wechat-id:hover {
-            background-color: #f0f0f0;
-            border-color: #ddd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .wechat-id:before {
+            content: '点击复制';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .wechat-id:hover:before {
+            opacity: 1;
         }
         
         .copy-btn {
-            background-color: #07c160;
+            background: linear-gradient(145deg, #0ed678, #07c160);
             color: white;
             border: none;
             padding: 10px 20px;
-            border-radius: 8px;
+            border-radius: 50px;
             cursor: pointer;
             margin-top: 10px;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(7, 193, 96, 0.3);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 3px 8px rgba(7, 193, 96, 0.3);
         }
         
         .copy-btn:hover {
-            background-color: #06ad56;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(7, 193, 96, 0.4);
+            background: linear-gradient(145deg, #07c160, #06ad56);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(7, 193, 96, 0.4);
         }
         
         .copy-btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
         
         .copy-btn i {
-            margin-right: 6px;
+            margin-right: 8px;
+        }
+        
+        .copy-btn:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .copy-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        /* 复制成功动画 */
+        .copy-success {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            z-index: 1070;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .copy-success.show {
+            animation: fadeInOut 1.5s ease;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -40%); }
+            20% { opacity: 1; transform: translate(-50%, -50%); }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
         }
         
         /* 移动端优化 */
         @media (max-width: 768px) {
             .wechat-content {
                 margin: 10px auto;
-                padding: 20px;
+                padding: 15px;
                 max-width: 100%;
             }
             
@@ -485,6 +462,12 @@
             margin-right: 5px;
         }
         
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
         .force-modal-body {
             font-size: 18px;
             margin-bottom: 25px;
@@ -523,7 +506,7 @@
             100% { width: 0%; }
         }
         
-        .countdown-container {
+        .countdown-ring {
             position: relative;
             width: 60px;
             height: 60px;
@@ -589,8 +572,7 @@
         
         .force-modal-btn.active:hover {
             background-color: #27ae60;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
         }
         
         .force-modal-btn.active:active {
@@ -598,18 +580,31 @@
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
-        .force-modal-btn .ripple {
+        .force-modal-btn.active:after {
+            content: "";
             position: absolute;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.6);
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .force-modal-btn.active:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
         }
         
         @keyframes ripple {
-            to {
-                transform: scale(2.5);
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
                 opacity: 0;
             }
         }
@@ -625,21 +620,21 @@
             background-color: rgba(0, 0, 0, 0.7);
             z-index: 2100;
             overflow: hidden;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(2px);
         }
         
         .guide-tooltip {
             position: absolute;
             background-color: white;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 18px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             max-width: 320px;
             z-index: 2110;
             opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            transform: translateY(10px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: opacity 0.4s, transform 0.4s;
+            transform: translateY(15px);
+            border-left: 4px solid #1a73e8;
         }
         
         .guide-tooltip.active {
@@ -649,45 +644,51 @@
         
         .guide-tooltip-arrow {
             position: absolute;
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             background-color: white;
             transform: rotate(45deg);
-            border: 1px solid rgba(0, 0, 0, 0.05);
             z-index: 2109;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
         
         .guide-tooltip-title {
             font-weight: bold;
             margin-bottom: 10px;
             color: #1a73e8;
-            font-size: 16px;
-            position: relative;
-            display: inline-block;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
         }
         
-        .guide-tooltip-title:after {
+        .guide-tooltip-title:before {
             content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 30px;
-            height: 2px;
+            display: inline-block;
+            width: 8px;
+            height: 8px;
             background-color: #1a73e8;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulseDot 1.5s infinite;
+        }
+        
+        @keyframes pulseDot {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
         }
         
         .guide-tooltip-content {
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.5;
             margin-bottom: 15px;
-            color: #333;
+            color: #444;
         }
         
         .guide-tooltip-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 5px;
         }
         
         .guide-progress {
@@ -700,57 +701,68 @@
             height: 8px;
             border-radius: 50%;
             background-color: #ddd;
-            margin: 0 3px;
-            transition: all 0.2s ease;
+            margin: 0 4px;
+            transition: all 0.3s ease;
         }
         
         .guide-dot.active {
             background-color: #1a73e8;
             width: 10px;
             height: 10px;
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
         }
         
         .guide-btn {
             padding: 8px 15px;
-            border-radius: 5px;
+            border-radius: 50px;
             border: none;
             font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
         
         .guide-next-btn {
             background-color: #1a73e8;
             color: white;
-            box-shadow: 0 2px 5px rgba(26, 115, 232, 0.3);
+            box-shadow: 0 3px 6px rgba(26, 115, 232, 0.3);
         }
         
         .guide-next-btn:hover {
             background-color: #0d62d1;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(26, 115, 232, 0.4);
+            box-shadow: 0 5px 10px rgba(26, 115, 232, 0.4);
         }
         
         .guide-skip-btn {
             background-color: transparent;
             color: #666;
             margin-right: 10px;
+            border: 1px solid #ddd;
         }
         
         .guide-skip-btn:hover {
+            background-color: #f5f5f5;
             color: #333;
-            background-color: rgba(0, 0, 0, 0.05);
+            border-color: #ccc;
         }
         
         /* 聚焦元素的高亮效果 */
         .guide-highlight {
             position: absolute;
-            border-radius: 4px;
+            border-radius: 6px;
             box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
             z-index: 2090;
             pointer-events: none;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(26, 115, 232, 0.6);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(255, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7), 0 0 0 4px rgba(255, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(255, 255, 255, 0.5); }
         }
     </style>
 </head>
@@ -816,28 +828,23 @@
         <div class="image-viewer" id="imageViewer">
             <span class="close-viewer" id="closeViewer">&times;</span>
             <img id="viewerImage" src="" alt="放大查看">
-            <div class="zoom-controls">
-                <button class="zoom-btn" id="zoomOut"><i class="bi bi-zoom-out"></i></button>
-                <button class="zoom-btn" id="zoomReset"><i class="bi bi-arrows-fullscreen"></i></button>
-                <button class="zoom-btn" id="zoomIn"><i class="bi bi-zoom-in"></i></button>
-            </div>
         </div>
         
         <!-- 微信联系弹窗 -->
         <div class="wechat-modal" id="wechatModal">
             <div class="wechat-content">
                 <span class="wechat-close" id="closeWechat">&times;</span>
-                <div class="wechat-title">
-                    <i class="bi bi-exclamation-triangle-fill me-1"></i>
-                    闲鱼平台违规无法讨论，请加微信咨询
-                </div>
+                <div class="wechat-title">闲鱼平台违规无法讨论，请加微信咨询</div>
                 <img class="wechat-qr" src="https://tgimg.langtest.online/file/1746167084350_7bd780d16a27bfb4d50cd2ee95e4f60.jpg" alt="微信二维码">
                 <p>或微信搜索添加:</p>
                 <div class="wechat-id" id="wechatId">_qiyue0907</div>
-                <button class="copy-btn" id="copyWechat">
-                    <i class="bi bi-clipboard"></i>复制微信号
-                </button>
+                <button class="copy-btn" id="copyWechat"><i class="bi bi-clipboard"></i>复制微信号</button>
             </div>
+        </div>
+        
+        <!-- 复制成功提示 -->
+        <div class="copy-success" id="copySuccess">
+            <i class="bi bi-check-circle me-2"></i>微信号已复制到剪贴板
         </div>
         
         <!-- 强制观看弹窗 -->
@@ -849,11 +856,11 @@
                 <div class="force-modal-body">
                     禁止在设置中登录，登录教程请看图片
                 </div>
-                <div class="countdown-container">
+                <div class="countdown-ring">
                     <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
                         <circle class="countdown-circle" cx="30" cy="30" r="25"></circle>
                         <circle class="countdown-progress" cx="30" cy="30" r="25" stroke-dasharray="157" stroke-dashoffset="0"></circle>
-                        <text class="countdown-text" x="30" y="30" text-anchor="middle" dominant-baseline="central" id="countdownTimer">3</text>
+                        <text class="countdown-text" x="30" y="30" text-anchor="middle" dominant-baseline="central" id="countdownText">3</text>
                     </svg>
                 </div>
                 <button class="force-modal-btn" id="closeForceModal">请等待倒计时结束</button>
@@ -943,53 +950,22 @@
             const viewerImage = $("#viewerImage");
             const closeViewer = $("#closeViewer");
             
-            // 缩放控制
-            const zoomIn = $("#zoomIn");
-            const zoomOut = $("#zoomOut");
-            const zoomReset = $("#zoomReset");
-            let currentZoom = 1;
-            
             // 点击图片时打开查看器
             tutorialImg.on('click', function() {
                 viewerImage.attr('src', $(this).attr('src'));
-                // 重置缩放
-                currentZoom = 1;
-                viewerImage.css('transform', `scale(${currentZoom})`);
-                
-                imageViewer.fadeIn(300);
+                imageViewer.fadeIn();
                 $('body').css('overflow', 'hidden'); // 防止背景滚动
-            });
-            
-            // 缩放功能
-            zoomIn.on('click', function(e) {
-                e.stopPropagation();
-                currentZoom += 0.2;
-                if (currentZoom > 3) currentZoom = 3; // 限制最大缩放
-                viewerImage.css('transform', `scale(${currentZoom})`);
-            });
-            
-            zoomOut.on('click', function(e) {
-                e.stopPropagation();
-                currentZoom -= 0.2;
-                if (currentZoom < 0.5) currentZoom = 0.5; // 限制最小缩放
-                viewerImage.css('transform', `scale(${currentZoom})`);
-            });
-            
-            zoomReset.on('click', function(e) {
-                e.stopPropagation();
-                currentZoom = 1;
-                viewerImage.css('transform', 'scale(1)');
             });
             
             // 点击关闭按钮或背景关闭查看器
             closeViewer.on('click', function() {
-                imageViewer.fadeOut(300);
+                imageViewer.fadeOut();
                 $('body').css('overflow', '');
             });
             
             imageViewer.on('click', function(e) {
                 if (e.target === this) {
-                    imageViewer.fadeOut(300);
+                    imageViewer.fadeOut();
                     $('body').css('overflow', '');
                 }
             });
@@ -1000,28 +976,38 @@
             const closeWechat = $("#closeWechat");
             const copyWechat = $("#copyWechat");
             const wechatId = $("#wechatId");
+            const copySuccess = $("#copySuccess");
             
             // 显示微信弹窗
             showWechat.on('click', function() {
-                wechatModal.fadeIn();
+                wechatModal.fadeIn(300);
                 $('body').css('overflow', 'hidden');
             });
             
             // 关闭微信弹窗
             closeWechat.on('click', function() {
-                wechatModal.fadeOut();
+                wechatModal.fadeOut(300);
                 $('body').css('overflow', '');
             });
             
             wechatModal.on('click', function(e) {
                 if (e.target === this) {
-                    wechatModal.fadeOut();
+                    wechatModal.fadeOut(300);
                     $('body').css('overflow', '');
                 }
             });
             
+            // 点击ID也能复制
+            wechatId.on('click', function() {
+                copyWechatId();
+            });
+            
             // 复制微信号
             copyWechat.on('click', function() {
+                copyWechatId();
+            });
+            
+            function copyWechatId() {
                 const textArea = document.createElement("textarea");
                 textArea.value = wechatId.text();
                 document.body.appendChild(textArea);
@@ -1030,13 +1016,22 @@
                 document.body.removeChild(textArea);
                 
                 // 显示复制成功提示
-                swal("复制成功", "微信号已复制到剪贴板", "success");
-            });
+                copySuccess.addClass('show');
+                setTimeout(() => {
+                    copySuccess.removeClass('show');
+                }, 1500);
+                
+                // 添加按钮效果
+                copyWechat.addClass('active');
+                setTimeout(() => {
+                    copyWechat.removeClass('active');
+                }, 300);
+            }
             
             // 强制弹窗功能
             const forceModal = $("#forceModal");
             const closeForceModalBtn = $("#closeForceModal");
-            const countdownTimer = $("#countdownTimer");
+            const countdownText = $("#countdownText");
             const countdownProgress = $(".countdown-progress");
             
             // 设置圆形进度条初始值
@@ -1050,16 +1045,16 @@
             
             if (shouldShow) {
                 // 显示弹窗
-                forceModal.fadeIn(400);
+                forceModal.fadeIn(300);
                 $('body').css('overflow', 'hidden');
                 
                 // 开始倒计时
                 let seconds = 3;
-                countdownTimer.text(seconds);
+                countdownText.text(seconds);
                 
                 const countdown = setInterval(function() {
                     seconds--;
-                    countdownTimer.text(seconds);
+                    countdownText.text(seconds);
                     
                     // 更新圆环进度
                     const offset = circumference * (1 - seconds / 3);
@@ -1070,17 +1065,17 @@
                         closeForceModalBtn.addClass('active');
                         closeForceModalBtn.text('我知道了');
                         
-                        // 添加波纹效果
-                        createRipple(closeForceModalBtn[0]);
+                        // 添加闪光效果
+                        closeForceModalBtn.append('<span class="ripple"></span>');
+                        setTimeout(() => {
+                            closeForceModalBtn.find('.ripple').remove();
+                        }, 1000);
                     }
                 }, 1000);
                 
                 // 点击关闭按钮
-                closeForceModalBtn.on('click', function(e) {
+                closeForceModalBtn.on('click', function() {
                     if ($(this).hasClass('active')) {
-                        // 添加波纹效果
-                        createRipple(this);
-                        
                         forceModal.fadeOut(300);
                         $('body').css('overflow', '');
                         // 记录显示时间
@@ -1095,26 +1090,6 @@
                 checkFirstVisit();
             }
             
-            // 创建按钮点击波纹效果
-            function createRipple(button) {
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple');
-                
-                const diameter = Math.max(button.clientWidth, button.clientHeight);
-                const radius = diameter / 2;
-                
-                ripple.style.width = ripple.style.height = `${diameter}px`;
-                ripple.style.left = `0px`;
-                ripple.style.top = `0px`;
-                
-                button.appendChild(ripple);
-                
-                // 清除波纹效果
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            }
-            
             // 用户引导功能
             function checkFirstVisit() {
                 const hasCompletedGuide = localStorage.getItem('hasCompletedGuide');
@@ -1123,7 +1098,7 @@
                     // 延迟显示引导，给用户一点时间先看页面
                     setTimeout(() => {
                         startGuide();
-                    }, 1000);
+                    }, 1500);
                 }
             }
             
@@ -1149,7 +1124,7 @@
                 },
                 {
                     targetSelector: ".alert-warning-custom",
-                    title: "重要提示",
+                    title: "注意验证码问题",
                     content: "如果遇到验证码，请直接更换其他ID，不要尝试输入验证码。",
                     position: "top"
                 },
@@ -1182,9 +1157,15 @@
                     guideProgress.append(dot);
                 }
                 
-                // 显示第一步引导
-                showStep(0);
-                guideOverlay.fadeIn(300);
+                // 隐藏高亮和提示，准备动画
+                guideHighlight.css({opacity: 0});
+                guideTooltip.removeClass('active');
+                
+                // 显示overlay
+                guideOverlay.fadeIn(400, function() {
+                    // 显示第一步引导
+                    showStep(0);
+                });
                 
                 // 绑定按钮事件
                 guideNext.off('click').on('click', nextStep);
@@ -1194,6 +1175,15 @@
                 guideOverlay.off('click').on('click', function(e) {
                     if (e.target === this) {
                         endGuide();
+                    }
+                });
+                
+                // 添加键盘支持
+                $(document).on('keydown.guide', function(e) {
+                    if (e.key === 'Escape') {
+                        endGuide();
+                    } else if (e.key === 'ArrowRight' || e.key === 'Enter') {
+                        nextStep();
                     }
                 });
             }
@@ -1215,92 +1205,117 @@
                     return;
                 }
                 
-                // 更新高亮区域
-                const offset = targetEl.offset();
-                const width = targetEl.outerWidth();
-                const height = targetEl.outerHeight();
+                // 先隐藏高亮
+                guideHighlight.css({opacity: 0});
                 
-                guideHighlight.css({
-                    top: offset.top,
-                    left: offset.left,
-                    width: width,
-                    height: height
-                });
-                
-                // 更新提示内容
-                guideTitle.text(step.title);
-                guideContent.text(step.content);
-                
-                // 更新进度点
-                guideProgress.find('.guide-dot').removeClass('active');
-                guideProgress.find('.guide-dot').eq(stepIndex).addClass('active');
-                
-                // 计算提示框位置
-                let tooltipTop, tooltipLeft, arrowTop, arrowLeft;
-                const tooltipWidth = 300; // 固定宽度
-                const tooltipHeight = 140; // 估计高度
-                const arrowSize = 12;
-                
-                switch (step.position) {
-                    case 'bottom':
-                        tooltipTop = offset.top + height + arrowSize;
-                        tooltipLeft = offset.left + width/2 - tooltipWidth/2;
-                        arrowTop = -arrowSize/2;
-                        arrowLeft = tooltipWidth/2 - arrowSize/2;
-                        break;
-                    case 'top':
-                        tooltipTop = offset.top - tooltipHeight - arrowSize;
-                        tooltipLeft = offset.left + width/2 - tooltipWidth/2;
-                        arrowTop = tooltipHeight - arrowSize/2;
-                        arrowLeft = tooltipWidth/2 - arrowSize/2;
-                        break;
-                    case 'left':
-                        tooltipTop = offset.top + height/2 - tooltipHeight/2;
-                        tooltipLeft = offset.left - tooltipWidth - arrowSize;
-                        arrowTop = tooltipHeight/2 - arrowSize/2;
-                        arrowLeft = tooltipWidth - arrowSize/2;
-                        break;
-                    case 'right':
-                    default:
-                        tooltipTop = offset.top + height/2 - tooltipHeight/2;
-                        tooltipLeft = offset.left + width + arrowSize;
-                        arrowTop = tooltipHeight/2 - arrowSize/2;
-                        arrowLeft = -arrowSize/2;
-                        break;
-                }
-                
-                // 确保提示框不超出屏幕边界
-                const windowWidth = $(window).width();
-                const windowHeight = $(window).height();
-                
-                if (tooltipLeft < 10) tooltipLeft = 10;
-                if (tooltipLeft + tooltipWidth > windowWidth - 10) tooltipLeft = windowWidth - tooltipWidth - 10;
-                if (tooltipTop < 10) tooltipTop = 10;
-                if (tooltipTop + tooltipHeight > windowHeight - 10) tooltipTop = windowHeight - tooltipHeight - 10;
-                
-                // 设置提示框和箭头位置
-                guideTooltip.css({
-                    top: tooltipTop,
-                    left: tooltipLeft
-                });
-                
-                guideArrow.css({
-                    top: arrowTop,
-                    left: arrowLeft
-                });
-                
-                // 更新按钮文字
-                if (stepIndex === guideSteps.length - 1) {
-                    guideNext.text('完成');
-                } else {
-                    guideNext.text('下一步');
-                }
-                
-                // 显示动画
-                guideTooltip.removeClass('active');
+                // 等待元素完成渲染
                 setTimeout(() => {
-                    guideTooltip.addClass('active');
-                }, 50);
+                    // 更新高亮区域
+                    const offset = targetEl.offset();
+                    const width = targetEl.outerWidth();
+                    const height = targetEl.outerHeight();
+                    
+                    guideHighlight.css({
+                        top: offset.top - 4,
+                        left: offset.left - 4,
+                        width: width + 8,
+                        height: height + 8,
+                        opacity: 1
+                    });
+                    
+                    // 更新提示内容
+                    guideTitle.text(step.title);
+                    guideContent.text(step.content);
+                    
+                    // 更新进度点
+                    guideProgress.find('.guide-dot').removeClass('active');
+                    guideProgress.find('.guide-dot').eq(stepIndex).addClass('active');
+                    
+                    // 计算提示框位置
+                    let tooltipTop, tooltipLeft, arrowTop, arrowLeft;
+                    const tooltipWidth = 320; // 固定宽度
+                    const tooltipHeight = 160; // 估计高度
+                    const arrowSize = 12;
+                    
+                    switch (step.position) {
+                        case 'bottom':
+                            tooltipTop = offset.top + height + arrowSize;
+                            tooltipLeft = offset.left + width/2 - tooltipWidth/2;
+                            arrowTop = -arrowSize/2;
+                            arrowLeft = tooltipWidth/2 - arrowSize/2;
+                            break;
+                        case 'top':
+                            tooltipTop = offset.top - tooltipHeight - arrowSize;
+                            tooltipLeft = offset.left + width/2 - tooltipWidth/2;
+                            arrowTop = tooltipHeight - arrowSize/2;
+                            arrowLeft = tooltipWidth/2 - arrowSize/2;
+                            break;
+                        case 'left':
+                            tooltipTop = offset.top + height/2 - tooltipHeight/2;
+                            tooltipLeft = offset.left - tooltipWidth - arrowSize;
+                            arrowTop = tooltipHeight/2 - arrowSize/2;
+                            arrowLeft = tooltipWidth - arrowSize/2;
+                            break;
+                        case 'right':
+                        default:
+                            tooltipTop = offset.top + height/2 - tooltipHeight/2;
+                            tooltipLeft = offset.left + width + arrowSize;
+                            arrowTop = tooltipHeight/2 - arrowSize/2;
+                            arrowLeft = -arrowSize/2;
+                            break;
+                    }
+                    
+                    // 确保提示框不超出屏幕边界
+                    const windowWidth = $(window).width();
+                    const windowHeight = $(window).height();
+                    
+                    if (tooltipLeft < 15) tooltipLeft = 15;
+                    if (tooltipLeft + tooltipWidth > windowWidth - 15) tooltipLeft = windowWidth - tooltipWidth - 15;
+                    if (tooltipTop < 15) tooltipTop = 15;
+                    if (tooltipTop + tooltipHeight > windowHeight - 15) tooltipTop = windowHeight - tooltipHeight - 15;
+                    
+                    // 设置提示框和箭头位置
+                    guideTooltip.css({
+                        top: tooltipTop,
+                        left: tooltipLeft
+                    });
+                    
+                    guideArrow.css({
+                        top: arrowTop,
+                        left: arrowLeft
+                    });
+                    
+                    // 更新按钮文字
+                    if (stepIndex === guideSteps.length - 1) {
+                        guideNext.text('完成');
+                    } else {
+                        guideNext.text('下一步');
+                    }
+                    
+                    // 显示动画
+                    guideTooltip.removeClass('active');
+                    setTimeout(() => {
+                        guideTooltip.addClass('active');
+                    }, 50);
+                    
+                    // 滚动到可见区域
+                    if (!isElementInViewport(targetEl[0])) {
+                        $('html, body').animate({
+                            scrollTop: offset.top - 100
+                        }, 500);
+                    }
+                }, 200);
+            }
+            
+            // 检查元素是否在可视区域内
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
             }
             
             // 下一步
@@ -1312,6 +1327,7 @@
             function endGuide() {
                 guideOverlay.fadeOut(300);
                 localStorage.setItem('hasCompletedGuide', 'true');
+                $(document).off('keydown.guide');
             }
         });
     </script>
