@@ -280,51 +280,104 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         
         .force-modal-content {
             background-color: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px;
+            border-radius: 16px;
             max-width: 90%;
-            width: 350px;
+            width: 380px;
             text-align: center;
             position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-top: 5px solid #ff4d4f;
+            animation: modal-appear 0.3s ease-out forwards;
+        }
+        
+        @keyframes modal-appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .force-modal-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #333;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .force-modal-title:after {
+            content: "";
+            display: block;
+            height: 3px;
+            width: 40px;
+            background-color: #ff4d4f;
+            margin: 8px auto 0;
+        }
+        
+        .force-modal-icon {
+            font-size: 42px;
             color: #ff4d4f;
+            margin-bottom: 20px;
         }
         
         .force-modal-message {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 16px;
-            line-height: 1.5;
+            line-height: 1.6;
+            color: #555;
+            padding: 0 10px;
+        }
+        
+        .force-modal-message strong {
+            color: #ff4d4f;
+            font-weight: 600;
         }
         
         .force-modal-timer {
             font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
+            color: #888;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .force-modal-timer span {
+            color: #ff4d4f;
+            font-weight: bold;
+            margin: 0 2px;
         }
         
         .force-modal-close {
-            background-color: #ddd;
-            color: #333;
+            background-color: #eee;
+            color: #888;
             border: none;
-            padding: 8px 20px;
-            border-radius: 5px;
+            padding: 10px 25px;
+            border-radius: 30px;
             cursor: not-allowed;
             transition: all 0.3s ease;
             opacity: 0.7;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         
         .force-modal-close.active {
@@ -332,6 +385,12 @@
             color: white;
             cursor: pointer;
             opacity: 1;
+            box-shadow: 0 5px 15px rgba(24, 144, 255, 0.3);
+        }
+        
+        .force-modal-close.active:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(24, 144, 255, 0.4);
         }
     </style>
 </head>
@@ -414,12 +473,15 @@
         <!-- 强制提示弹窗 -->
         <div class="force-modal" id="forceModal">
             <div class="force-modal-content">
+                <div class="force-modal-icon">
+                    <i class="bi bi-exclamation-circle"></i>
+                </div>
                 <div class="force-modal-title">重要提示</div>
                 <div class="force-modal-message">
-                    <strong>禁止在设置中登录，登录教程请看图片</strong>
+                    <strong>禁止在设置中登录</strong>，登录教程请看图片演示
                 </div>
                 <div class="force-modal-timer">请等待 <span id="countdown">3</span> 秒</div>
-                <button class="force-modal-close" id="forceModalClose">关闭</button>
+                <button class="force-modal-close" id="forceModalClose">我知道了</button>
             </div>
         </div>
     </main>
