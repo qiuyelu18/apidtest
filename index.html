@@ -43,7 +43,6 @@
             /* 平滑过渡 */
             opacity: 1;
             transition: opacity 0.3s ease;
-            cursor: zoom-in; /* 确保鼠标显示为放大镜样式 */
         }
         
         /* 折叠面板样式 */
@@ -98,13 +97,7 @@
             background-color: rgba(0, 0, 0, 0.9);
             z-index: 1050;
             overflow: auto;
-            padding: 0;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-        
-        .image-viewer.active {
-            opacity: 1;
+            padding: 10px;
         }
         
         .image-viewer img {
@@ -113,12 +106,6 @@
             max-height: 90vh;
             margin: 30px auto;
             object-fit: contain;
-            transition: transform 0.3s ease;
-            transform: scale(0.95);
-        }
-        
-        .image-viewer.active img {
-            transform: scale(1);
         }
         
         .close-viewer {
@@ -129,18 +116,6 @@
             font-size: 30px;
             cursor: pointer;
             z-index: 1060;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            transition: background-color 0.2s ease;
-        }
-        
-        .close-viewer:hover {
-            background-color: rgba(255, 255, 255, 0.2);
         }
         
         /* 可点击图片样式 */
@@ -221,8 +196,8 @@
             font-weight: bold;
             margin-bottom: 15px;
             color: #ff4d4f;
-            padding: 12px 10px;
-            border-radius: 6px;
+            padding: 8px 5px;
+            border-radius: 4px;
             background-color: #fff1f0;
             border: 1px dashed #ffccc7;
             animation: pulse 1.5s infinite;
@@ -276,7 +251,7 @@
         .alert-warning-custom {
             background-color: #fff4e5;
             color: #d46b08;
-            padding: 12px 15px;
+            padding: 10px 15px;
             border-radius: 6px;
             border: 1px dashed #ffbb96;
             margin: 15px auto;
@@ -284,7 +259,6 @@
             position: relative;
             animation: attention 2s infinite;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(212, 107, 8, 0.1);
         }
         
         @keyframes attention {
@@ -298,120 +272,78 @@
             font-size: 1.1em;
         }
         
-        /* 强制弹窗样式 */
+        /* 强制提示弹窗样式 */
         .force-modal {
             display: none;
             position: fixed;
-            top: 0;
+            z-index: 2000;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
             align-items: center;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            justify-content: center;
         }
         
         .force-modal-content {
-            background-color: white;
-            padding: 30px 25px;
-            border-radius: 16px;
-            max-width: 90%;
-            width: 380px;
+            background-color: #fff;
+            padding: 25px 20px;
+            border-radius: 10px;
             text-align: center;
+            max-width: 90%;
+            width: 350px;
             position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            transform: translateY(20px);
-            animation: modal-slide-up 0.3s ease forwards;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: modalIn 0.3s ease-out;
         }
         
-        @keyframes modal-slide-up {
-            to { transform: translateY(0); }
-        }
-        
-        .force-modal-icon {
-            background-color: #ffefef;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-        
-        .force-modal-icon i {
-            font-size: 32px;
-            color: #ff4d4f;
-        }
-        
-        .force-modal-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #333;
+        @keyframes modalIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
         
         .force-modal-message {
-            margin-bottom: 25px;
-            font-size: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
             line-height: 1.5;
-            color: #555;
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 10px;
         }
         
         .force-modal-timer {
-            font-size: 15px;
-            color: #777;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .force-modal-timer i {
-            margin-right: 8px;
-        }
-        
-        #countdown {
-            font-weight: bold;
             display: inline-block;
-            width: 24px;
-            height: 24px;
-            line-height: 24px;
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: #e74c3c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
             border-radius: 50%;
-            margin-left: 5px;
+            font-weight: bold;
+            margin-top: 10px;
         }
         
         .force-modal-close {
-            background-color: #f0f0f0;
-            color: #999;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background-color: #ccc;
             border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 500;
+            border-radius: 5px;
+            color: #666;
+            font-weight: bold;
             cursor: not-allowed;
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 200px;
+            transition: all 0.3s;
         }
         
         .force-modal-close.active {
-            background-color: #1890ff;
+            background-color: #2ecc71;
             color: white;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
         }
         
         .force-modal-close.active:hover {
-            background-color: #096dd9;
+            background-color: #27ae60;
             transform: translateY(-2px);
         }
     </style>
@@ -448,8 +380,8 @@
             <!-- 验证码提示 -->
             <div class="alert-warning-custom">
                 <i class="bi bi-exclamation-triangle-fill"></i>
-                <div>弹出要求验证码就直接换其他ID！</div>
-                <div>换ID后搜不到重启AppStore即可</div>
+                弹出要求验证码就直接换其他ID！<br>
+                换ID后搜不到重启AppStore即可
             </div>
             
             <div class="col-auto text-center w-100">
@@ -488,30 +420,18 @@
                 <img class="wechat-qr" src="https://tgimg.langtest.online/file/1746167084350_7bd780d16a27bfb4d50cd2ee95e4f60.jpg" alt="微信二维码">
                 <p>或微信搜索添加:</p>
                 <div class="wechat-id" id="wechatId">_qiyue0907</div>
-                <button class="copy-btn" id="copyWechat">
-                    <i class="bi bi-clipboard"></i> 复制微信号
-                </button>
-                <p class="mt-3 small text-muted">添加微信咨询：软件使用、网络问题、加速服务</p>
+                <button class="copy-btn" id="copyWechat">复制微信号</button>
             </div>
         </div>
         
         <!-- 强制提示弹窗 -->
         <div class="force-modal" id="forceModal">
             <div class="force-modal-content">
-                <div class="force-modal-icon">
-                    <i class="bi bi-exclamation-triangle"></i>
-                </div>
-                <div class="force-modal-title">重要安全提示</div>
                 <div class="force-modal-message">
-                    <strong>禁止在设置中登录，登录教程请看图片</strong>
-                    <p class="mb-0 mt-2 small">请严格遵循安装步骤，确保正常使用</p>
+                    禁止在设置中登录，登录教程请看图片
                 </div>
-                <div class="force-modal-timer">
-                    <i class="bi bi-clock"></i>请等待<span id="countdown">3</span>秒
-                </div>
-                <button class="force-modal-close" id="forceModalClose">
-                    <span id="closeButtonText">请等待倒计时结束</span>
-                </button>
+                <div class="force-modal-timer" id="forceTimer">3</div>
+                <button class="force-modal-close" id="forceClose">关闭提示 (<span id="timerText">3</span>)</button>
             </div>
         </div>
     </main>
@@ -581,42 +501,22 @@
             // 点击图片时打开查看器
             tutorialImg.on('click', function() {
                 viewerImage.attr('src', $(this).attr('src'));
-                imageViewer.css('display', 'block');
-                
-                // 添加平滑过渡效果
-                setTimeout(function() {
-                    imageViewer.addClass('active');
-                }, 10);
-                
+                imageViewer.fadeIn();
                 $('body').css('overflow', 'hidden'); // 防止背景滚动
             });
             
             // 点击关闭按钮或背景关闭查看器
             closeViewer.on('click', function() {
-                closeImageViewer();
+                imageViewer.fadeOut();
+                $('body').css('overflow', '');
             });
             
             imageViewer.on('click', function(e) {
                 if (e.target === this) {
-                    closeImageViewer();
-                }
-            });
-            
-            // 添加键盘Esc关闭功能
-            $(document).on('keydown', function(e) {
-                if (e.key === 'Escape' && imageViewer.is(':visible')) {
-                    closeImageViewer();
-                }
-            });
-            
-            // 关闭图片查看器函数
-            function closeImageViewer() {
-                imageViewer.removeClass('active');
-                setTimeout(function() {
-                    imageViewer.css('display', 'none');
+                    imageViewer.fadeOut();
                     $('body').css('overflow', '');
-                }, 300);
-            }
+                }
+            });
             
             // 微信引流功能
             const wechatModal = $("#wechatModal");
@@ -627,19 +527,19 @@
             
             // 显示微信弹窗
             showWechat.on('click', function() {
-                wechatModal.fadeIn(300);
+                wechatModal.fadeIn();
                 $('body').css('overflow', 'hidden');
             });
             
             // 关闭微信弹窗
             closeWechat.on('click', function() {
-                wechatModal.fadeOut(300);
+                wechatModal.fadeOut();
                 $('body').css('overflow', '');
             });
             
             wechatModal.on('click', function(e) {
                 if (e.target === this) {
-                    wechatModal.fadeOut(300);
+                    wechatModal.fadeOut();
                     $('body').css('overflow', '');
                 }
             });
@@ -653,66 +553,63 @@
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
                 
-                // 显示复制成功提示，增强反馈
-                swal({
-                    title: "复制成功!",
-                    text: "微信号已复制到剪贴板",
-                    icon: "success",
-                    buttons: false,
-                    timer: 1500
-                });
+                // 显示复制成功提示
+                swal("复制成功", "微信号已复制到剪贴板", "success");
             });
             
-            // 强制弹窗功能
+            // 强制提示弹窗功能
             const forceModal = $("#forceModal");
-            const forceModalClose = $("#forceModalClose");
-            const countdownSpan = $("#countdown");
-            const forceModalKey = "force_modal_shown";
-            const forceModalExpire = "force_modal_expire";
+            const forceClose = $("#forceClose");
+            const timerText = $("#timerText");
             
-            // 检查是否需要显示弹窗
-            function checkForceModal() {
-                const shownBefore = localStorage.getItem(forceModalKey);
-                const expireTime = localStorage.getItem(forceModalExpire);
-                const now = new Date().getTime();
-                
-                // 如果10分钟内已经显示过，则不再显示
-                if (shownBefore && expireTime && now < parseInt(expireTime)) {
-                    return;
-                }
-                
-                // 显示弹窗并设置10分钟有效期
-                forceModal.css('display', 'flex');
-                localStorage.setItem(forceModalKey, 'true');
-                localStorage.setItem(forceModalExpire, (now + 10 * 60 * 1000).toString());
-                
-                // 开始倒计时
-                let countdown = 3;
-                countdownSpan.text(countdown);
-                $("#closeButtonText").text("请等待倒计时结束");
-                
-                const timer = setInterval(function() {
-                    countdown--;
-                    countdownSpan.text(countdown);
-                    
-                    if (countdown <= 0) {
-                        clearInterval(timer);
-                        forceModalClose.addClass('active');
-                        forceModalClose.prop('disabled', false);
-                        $("#closeButtonText").text("我知道了");
-                    }
-                }, 1000);
-                
-                // 绑定关闭按钮事件
-                forceModalClose.on('click', function() {
-                    if ($(this).hasClass('active')) {
-                        forceModal.hide();
-                    }
-                });
+            // 检查cookie是否在10分钟内已经显示过
+            function checkCookie(name) {
+                const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                return match ? match[2] : null;
             }
             
+            // 设置cookie
+            function setCookie(name, value, minutes) {
+                const date = new Date();
+                date.setTime(date.getTime() + (minutes * 60 * 1000));
+                document.cookie = name + "=" + value + "; expires=" + date.toUTCString() + "; path=/";
+            }
+            
+            // 显示弹窗
+            function showForceModal() {
+                if (!checkCookie('force_modal_shown')) {
+                    forceModal.css('display', 'flex');
+                    $('body').css('overflow', 'hidden');
+                    
+                    let seconds = 3;
+                    const timer = setInterval(function() {
+                        seconds--;
+                        timerText.text(seconds);
+                        $("#forceTimer").text(seconds);
+                        
+                        if (seconds <= 0) {
+                            clearInterval(timer);
+                            forceClose.addClass('active');
+                            timerText.text("0");
+                            $("#forceTimer").text("0");
+                        }
+                    }, 1000);
+                    
+                    // 设置cookie，10分钟内不再显示
+                    setCookie('force_modal_shown', 'true', 10);
+                }
+            }
+            
+            // 关闭弹窗
+            forceClose.on('click', function() {
+                if ($(this).hasClass('active')) {
+                    forceModal.fadeOut();
+                    $('body').css('overflow', '');
+                }
+            });
+            
             // 页面加载完成后显示弹窗
-            setTimeout(checkForceModal, 500);
+            setTimeout(showForceModal, 500);
         });
     </script>
 </body>
