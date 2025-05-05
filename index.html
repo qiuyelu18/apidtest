@@ -247,6 +247,73 @@
             }
         }
         
+        /* 强制提示弹窗样式 */
+        .forced-notice-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .forced-notice-content {
+            background-color: white;
+            padding: 30px 25px;
+            border-radius: 10px;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .forced-notice-title {
+            color: #ff4d4f;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .forced-notice-message {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .forced-notice-timer {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .forced-notice-btn {
+            background-color: #cccccc;
+            color: #666;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 20px;
+            font-size: 16px;
+            cursor: not-allowed;
+            transition: all 0.3s ease;
+        }
+        
+        .forced-notice-btn.active {
+            background-color: #1890ff;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .forced-notice-btn.active:hover {
+            background-color: #40a9ff;
+            transform: translateY(-2px);
+        }
+        
         /* 醒目提示文字 */
         .alert-warning-custom {
             background-color: #fff4e5;
@@ -270,78 +337,6 @@
         .alert-warning-custom i {
             margin-right: 5px;
             font-size: 1.1em;
-        }
-        
-        /* 强制弹窗样式 */
-        .force-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .force-modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 25px;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            text-align: center;
-        }
-        
-        .force-modal-header {
-            font-size: 20px;
-            font-weight: bold;
-            color: #e74c3c;
-            margin-bottom: 15px;
-        }
-        
-        .force-modal-body {
-            font-size: 18px;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        
-        .force-modal-timer {
-            color: #e74c3c;
-            font-weight: bold;
-            font-size: 20px;
-            margin: 10px 0;
-        }
-        
-        .force-modal-btn {
-            background-color: #ccc;
-            color: #666;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: not-allowed;
-            transition: all 0.3s ease;
-        }
-        
-        .force-modal-btn.active {
-            background-color: #2ecc71;
-            color: white;
-            cursor: pointer;
-        }
-        
-        .force-modal-btn.active:hover {
-            background-color: #27ae60;
-            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -420,24 +415,27 @@
                 <button class="copy-btn" id="copyWechat">复制微信号</button>
             </div>
         </div>
-        
-        <!-- 强制观看弹窗 -->
-        <div class="force-modal" id="forceModal">
-            <div class="force-modal-content">
-                <div class="force-modal-header">
-                    <i class="bi bi-exclamation-triangle-fill"></i> 重要提示
-                </div>
-                <div class="force-modal-body">
-                    禁止在设置中登录，登录教程请看图片
-                </div>
-                <div class="force-modal-timer">
-                    请等待 <span id="countdownTimer">3</span> 秒
-                </div>
-                <button class="force-modal-btn" id="closeForceModal">我知道了</button>
-            </div>
-        </div>
     </main>
     <textarea id="copy" readonly="readonly" style="display: none;"></textarea>
+    
+    <!-- 强制提示弹窗 -->
+    <div class="forced-notice-modal" id="forcedNoticeModal">
+        <div class="forced-notice-content">
+            <div class="forced-notice-title">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>重要提示
+            </div>
+            <div class="forced-notice-message">
+                禁止在设置中登录，登录教程请看图片
+            </div>
+            <div class="forced-notice-timer">
+                请等待 <span id="noticeCountdown">3</span> 秒
+            </div>
+            <button class="forced-notice-btn" id="noticeCloseBtn" disabled>
+                我知道了
+            </button>
+        </div>
+    </div>
+    
     <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/js/bootstrap.min.js"
         type="application/javascript"></script>
     <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"
@@ -559,43 +557,69 @@
                 swal("复制成功", "微信号已复制到剪贴板", "success");
             });
             
-            // 强制弹窗功能
-            const forceModal = $("#forceModal");
-            const closeForceModalBtn = $("#closeForceModal");
-            const countdownTimer = $("#countdownTimer");
+            // 强制提示弹窗功能
+            const forcedNoticeModal = $("#forcedNoticeModal");
+            const noticeCloseBtn = $("#noticeCloseBtn");
+            const noticeCountdown = $("#noticeCountdown");
             
-            // 检查是否需要显示弹窗（10分钟内不再显示）
-            const lastShownTime = localStorage.getItem('forceModalLastShown');
-            const shouldShow = !lastShownTime || (Date.now() - parseInt(lastShownTime)) > 10 * 60 * 1000;
-            
-            if (shouldShow) {
-                // 显示弹窗
-                forceModal.show();
-                $('body').css('overflow', 'hidden');
-                
-                // 开始倒计时
-                let seconds = 3;
-                const countdown = setInterval(function() {
-                    seconds--;
-                    countdownTimer.text(seconds);
+            // 检查Cookie，决定是否显示弹窗
+            function showForcedNotice() {
+                if (!getCookie("noticeShown")) {
+                    forcedNoticeModal.css("display", "flex");
+                    $('body').css('overflow', 'hidden');
                     
-                    if (seconds <= 0) {
-                        clearInterval(countdown);
-                        closeForceModalBtn.addClass('active');
-                        closeForceModalBtn.text('关闭');
-                    }
-                }, 1000);
-                
-                // 点击关闭按钮
-                closeForceModalBtn.on('click', function() {
-                    if ($(this).hasClass('active')) {
-                        forceModal.hide();
-                        $('body').css('overflow', '');
-                        // 记录显示时间
-                        localStorage.setItem('forceModalLastShown', Date.now());
-                    }
-                });
+                    // 倒计时
+                    let seconds = 3;
+                    const countdownInterval = setInterval(function() {
+                        seconds--;
+                        noticeCountdown.text(seconds);
+                        
+                        if (seconds <= 0) {
+                            clearInterval(countdownInterval);
+                            noticeCloseBtn.prop("disabled", false).addClass("active");
+                        }
+                    }, 1000);
+                    
+                    // 设置Cookie，10分钟内不再显示
+                    setCookie("noticeShown", "true", 10);
+                }
             }
+            
+            // 点击关闭按钮
+            noticeCloseBtn.on('click', function() {
+                if (!$(this).prop("disabled")) {
+                    forcedNoticeModal.fadeOut();
+                    $('body').css('overflow', '');
+                }
+            });
+            
+            // Cookie操作函数
+            function setCookie(name, value, minutes) {
+                const date = new Date();
+                date.setTime(date.getTime() + (minutes * 60 * 1000));
+                const expires = "expires=" + date.toUTCString();
+                document.cookie = name + "=" + value + ";" + expires + ";path=/";
+            }
+            
+            function getCookie(name) {
+                const cookieName = name + "=";
+                const decodedCookie = decodeURIComponent(document.cookie);
+                const cookieArray = decodedCookie.split(';');
+                
+                for (let i = 0; i < cookieArray.length; i++) {
+                    let cookie = cookieArray[i];
+                    while (cookie.charAt(0) === ' ') {
+                        cookie = cookie.substring(1);
+                    }
+                    if (cookie.indexOf(cookieName) === 0) {
+                        return cookie.substring(cookieName.length, cookie.length);
+                    }
+                }
+                return "";
+            }
+            
+            // 页面加载完毕显示弹窗
+            showForcedNotice();
         });
     </script>
 </body>
