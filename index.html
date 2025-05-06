@@ -464,7 +464,7 @@
                 </div>
                 <div id="inputSection" style="display: none;">
                     <p>请输入以下文字确认理解：</p>
-                    <p><strong>我明白禁止在设置换ID，需要打开AppStore换ID</strong></p>
+                    <p><strong>我明白禁止在设置换ID，并且会仔细看文字和图片教程</strong></p>
                     <input type="text" class="force-modal-input" id="confirmInput" placeholder="请输入上面的确认文字">
                     <div class="force-modal-error" id="inputError">输入不正确，请重新输入确认文字</div>
                 </div>
@@ -602,11 +602,25 @@
             const inputSection = $("#inputSection");
             const confirmInput = $("#confirmInput");
             const inputError = $("#inputError");
-            const correctText = "我明白禁止在设置换ID，需要打开AppStore换ID";
+            const correctText = "我明白禁止在设置换ID，并且会仔细看文字和图片教程";
             
-            // 检查是否需要显示弹窗（10分钟内不再显示）
+            // 检查是否需要显示弹窗
+            // 获取当前日期（年-月-日格式）作为日期标识
+            const getCurrentDateKey = function() {
+                const now = new Date();
+                return `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
+            };
+            
+            const lastShownDay = localStorage.getItem('forceModalLastShownDay');
             const lastShownTime = localStorage.getItem('forceModalLastShown');
-            const shouldShow = !lastShownTime || (Date.now() - parseInt(lastShownTime)) > 10 * 60 * 1000;
+            const currentDateKey = getCurrentDateKey();
+            
+            // 判断是否显示弹窗：
+            // 1. 如果今天没有显示过（日期不同）且
+            // 2. 最近10分钟内没有显示过（避免频繁显示）
+            const shouldShow = 
+                (lastShownDay !== currentDateKey) && 
+                (!lastShownTime || (Date.now() - parseInt(lastShownTime)) > 10 * 60 * 1000);
             
             if (shouldShow) {
                 // 显示弹窗
@@ -647,7 +661,9 @@
                     if (confirmInput.val() === correctText) {
                         forceModal.hide();
                         $('body').css('overflow', '');
-                        // 记录显示时间
+                        // 记录今天已经显示过
+                        localStorage.setItem('forceModalLastShownDay', currentDateKey);
+                        // 记录显示时间（用于10分钟内不再显示）
                         localStorage.setItem('forceModalLastShown', Date.now());
                     } else {
                         confirmInput.addClass('error');
