@@ -5,24 +5,22 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
         name="viewport" />
-    <meta content="小火箭在线安装,小火箭下载,小火箭加速器,小火箭账号,小火箭,小火箭vpn" name="keywords" />
-    <meta content="提供免费的苹果账号用于在线安装Shadowrocket(小火箭)，包括美区Apple ID和详细使用教程" name="description" />
-    <title>最新可用免费共享小火箭账号美区Apple id</title>
-    <meta content="最新可用免费共享小火箭账号美区Apple id" property="og:title" />
-    <meta content="提供免费的苹果账号用于在线安装Shadowrocket(小火箭)，包括美区Apple ID和详细使用教程" property="og:description" />
+    <meta content="土豆在线安装,土豆下载,土豆账号,土豆" name="keywords" />
+    <meta content="提供免费的苹果账号用于在线安装Potato(土豆)，包括美区Apple ID和详细使用教程" name="description" />
+    <title>最新可用免费共享土豆账号美区Apple id</title>
+    <meta content="最新可用免费共享土豆账号美区Apple id" property="og:title" />
+    <meta content="提供免费的苹果账号用于在线安装Potato(土豆)，包括美区Apple ID和详细使用教程" property="og:description" />
     <meta
-        content="https://is4-ssl.mzstatic.com/image/thumb/Purple126/v4/c5/50/ad/c550ad28-d7bb-209c-05a6-849296bfddc5/AppIcon-0-1x_U007emarketing-0-10-0-0-85-220.png/230x0w.webp"
+        content="https://play-lh.googleusercontent.com/ZczpoRKSYYKjS0QjChWn1HMN6OP_9ic0vZQ5i_6ceFqxUk_0ug1pq-_-judYtTqaLPM=w240-h480-rw"
         property="og:image" />
     <link
-        href="https://is4-ssl.mzstatic.com/image/thumb/Purple126/v4/c5/50/ad/c550ad28-d7bb-209c-05a6-849296bfddc5/AppIcon-0-1x_U007emarketing-0-10-0-0-85-220.png/230x0w.webp"
+        href="https://play-lh.googleusercontent.com/ZczpoRKSYYKjS0QjChWn1HMN6OP_9ic0vZQ5i_6ceFqxUk_0ug1pq-_-judYtTqaLPM=w240-h480-rw"
         rel="shortcut icon" />
     <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet"
         type="text/css" />
     <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
         rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css"
-        integrity="sha512-bZBu2H0+FGFz/stDN/L0k8J0G8qVsAL0ht1qg5kTwtAheiXwiRKyCq1frwfbSFSJN3jooR5kauE0YjtPzhZtJQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.staticfile.org/flag-icons/6.6.6/css/flag-icons.min.css" rel="stylesheet" />
     <style>
         a {
             text-decoration: unset;
@@ -35,31 +33,442 @@
         :root {
             --bs-success-rgb: 111, 208, 136;
         }
+        
+        .tutorial-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: 15px;
+            /* 平滑过渡 */
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* 折叠面板样式 */
+        .collapse-panel {
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: 0.375rem;
+            margin-top: 20px;
+            background-color: #fff;
+            overflow: hidden;
+            margin-bottom: 30px; /* 添加底部间距 */
+        }
+        
+        .collapse-header {
+            padding: 12px 16px;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 500;
+            color: #333;
+            transition: background-color 0.2s ease;
+        }
+        
+        .collapse-header:hover {
+            background-color: #f1f3f5;
+        }
+        
+        .collapse-content {
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .collapse-content.show {
+            padding: 16px;
+        }
+        
+        /* 加载指示器样式 */
+        .loading-indicator {
+            display: none;
+            margin: 15px auto;
+        }
+        
+        /* 图片查看器样式 */
+        .image-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1050;
+            overflow: auto;
+            padding: 10px;
+        }
+        
+        .image-viewer img {
+            display: block;
+            max-width: 100%;
+            max-height: 90vh;
+            margin: 30px auto;
+            object-fit: contain;
+        }
+        
+        .close-viewer {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1060;
+        }
+        
+        /* 可点击图片样式 */
+        .tutorial-img {
+            cursor: zoom-in;
+        }
+        
+        /* 引流链接样式 */
+        .support-link {
+            margin: 15px auto;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            border: 1px solid #0d6efd;
+            display: inline-block;
+            color: #0d6efd;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .support-link:hover {
+            background-color: #0d6efd;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .support-link .bi {
+            margin-right: 5px;
+        }
+        
+        /* 微信弹窗样式 */
+        .wechat-modal {
+            display: none;
+            position: fixed;
+            z-index: 1060;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            overflow-y: auto; /* 添加滚动条 */
+            padding: 0 10px;
+        }
+        
+        .wechat-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 350px;
+            position: relative;
+            width: 100%;
+        }
+        
+        .wechat-qr {
+            width: auto;
+            max-width: 100%;
+            max-height: 65vh; /* 使用视口高度作为参考 */
+            margin: 0 auto 15px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .wechat-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* 醒目的标题样式 */
+        .wechat-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ff4d4f;
+            padding: 8px 5px;
+            border-radius: 4px;
+            background-color: #fff1f0;
+            border: 1px dashed #ffccc7;
+            animation: pulse 1.5s infinite;
+            white-space: normal; /* 允许文本换行 */
+            line-height: 1.4;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 77, 79, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 77, 79, 0); }
+        }
+        
+        .wechat-id {
+            background-color: #f1f1f1;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border: 1px dashed #ddd;
+        }
+        
+        .copy-btn {
+            background-color: #07c160;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #06ad56;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .wechat-content {
+                margin: 10px auto;
+                padding: 15px;
+                max-width: 100%;
+            }
+            
+            .wechat-qr {
+                max-height: 60vh;
+            }
+        }
+        
+        /* 醒目提示文字 */
+        .alert-warning-custom {
+            background-color: #fff4e5;
+            color: #d46b08;
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 1px dashed #ffbb96;
+            margin: 15px auto;
+            font-weight: bold;
+            position: relative;
+            animation: attention 2s infinite;
+            text-align: center;
+        }
+        
+        @keyframes attention {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        .alert-warning-custom i {
+            margin-right: 5px;
+            font-size: 1.1em;
+        }
+        
+        /* 强制弹窗样式 */
+        .force-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .force-modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 25px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            text-align: center;
+        }
+        
+        .force-modal-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .force-modal-body {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .force-modal-timer {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        
+        .force-modal-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .force-modal-input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+        
+        .force-modal-input.error {
+            border-color: #e74c3c;
+            background-color: #ffeaea;
+        }
+        
+        .force-modal-btn {
+            background-color: #ccc;
+            color: #666;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: not-allowed;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .force-modal-btn.active {
+            background-color: #2ecc71;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .force-modal-btn.active:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .force-modal-error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
     </style>
 </head>
 
 <body class="text-center container-fluid py-5 m-auto">
     <main>
-        <img alt="" class="shadow mb-4 bg-body-tertiary rounded-circle" height="120"
-            src="https://is4-ssl.mzstatic.com/image/thumb/Purple126/v4/c5/50/ad/c550ad28-d7bb-209c-05a6-849296bfddc5/AppIcon-0-1x_U007emarketing-0-10-0-0-85-220.png/230x0w.webp"
+        <img alt="" class="shadow mb-4 bg-body-tertiary rounded" height="120"
+            src="https://tgimg.langtest.online/file/1743834442278_未命名的设计 (1).png"
             width="120" />
-        <h1 class="mb-3 fw-normal">Shadowrocket (小火箭)</h1>
+        <h1 class="mb-3 fw-normal">Potato (土豆)</h1>
+        
+        <!-- 引流链接 -->
+        <div class="mb-4">
+            <a href="javascript:void(0)" class="support-link" id="showWechat">
+                <i class="bi bi-wechat"></i> 软件使用问题、网络问题、账号购买点击这里
+            </a>
+        </div>
+        
         <div class="mx-1 row justify-content-center">
             <ol class="col-auto text-start">
-                <li>打开iPhone/iPad的蓝色<strong>&nbsp AppStore &nbsp</strong>软件（请不要打开设置）</li>
+                <li>打开iPhone/iPad的蓝色<strong>&nbsp AppStore &nbsp</strong>软件（请不要在设置中登录）</li>
                 <li>右上角点击<strong>&nbsp 个人头像&nbsp </strong>进入账户，下拉到最底找到并点击<strong>&nbsp 退出登录&nbsp</strong></li>
                 <li><strong> &nbsp复制&nbsp</strong>本网站 共享账号和密码</li>
                 <li>点击登录，提示<strong> &nbspApple id安全&nbsp</strong>，请点击<strong> &nbsp其他选项-不升级&nbsp</strong></li>
                 <li>
                     搜索 <strong> &nbsp<a class="btn btn-primary btn-sm"
-                            href="https://apps.apple.com/us/app/shadowrocket/id932747118"
-                            target="_blank">Shadowrocket</a>&nbsp</strong>下载，或者其他你想下载的软件
+                            href="https://apps.apple.com/us/app/id1204726898"
+                            target="_blank">Potato</a>&nbsp</strong>下载，或者其他你想下载的软件
                 </li>
-                <li>用完务必<strong>&nbsp退出登录&nbsp</strong>，避免你的手机被锁</li>
+                <li>用完务必<strong>&nbsp退出登录&nbsp</strong>，换回自己的ID</li>
             </ol>
+            
+            <!-- 验证码提示 -->
+            <div class="alert-warning-custom">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                弹出要求验证码就直接换其他ID！<br>
+                换ID后搜不到重启AppStore即可
+            </div>
+            
+            <div class="col-auto text-center w-100">
+                <div class="collapse-panel">
+                    <div class="collapse-header" id="tutorialHeader">
+                        <span><i class="bi bi-image me-2"></i>图文安装教程（点击展开）</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <div class="collapse collapse-content" id="tutorialContent">
+                        <div class="text-center position-relative">
+                            <div class="spinner-border text-primary loading-indicator" role="status" id="loadingIndicator">
+                                <span class="visually-hidden">加载中...</span>
+                            </div>
+                            <img src="https://tgimg.langtest.online/file/1745496804709_image.png" alt="土豆安装图文教程" class="tutorial-img" id="tutorialImg">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row text-start justify-content-center" id="apple">
             <div class="col-auto my-5" id="loading"><i aria-hidden="true" class="spinner-border me-5"></i> 加载最新账号信息
+            </div>
+        </div>
+        
+        <!-- 图片查看器 -->
+        <div class="image-viewer" id="imageViewer">
+            <span class="close-viewer" id="closeViewer">&times;</span>
+            <img id="viewerImage" src="" alt="放大查看">
+        </div>
+        
+        <!-- 微信联系弹窗 -->
+        <div class="wechat-modal" id="wechatModal">
+            <div class="wechat-content">
+                <span class="wechat-close" id="closeWechat">&times;</span>
+                <div class="wechat-title">闲鱼平台违规无法讨论，请加微信咨询</div>
+                <img class="wechat-qr" src="https://tgimg.langtest.online/file/1746167084350_7bd780d16a27bfb4d50cd2ee95e4f60.jpg" alt="微信二维码">
+                <p>或微信搜索添加:</p>
+                <div class="wechat-id" id="wechatId">_qiyue0907</div>
+                <button class="copy-btn" id="copyWechat">复制微信号</button>
+            </div>
+        </div>
+        
+        <!-- 强制观看弹窗 -->
+        <div class="force-modal" id="forceModal">
+            <div class="force-modal-content">
+                <div class="force-modal-header">
+                    <i class="bi bi-exclamation-triangle-fill"></i> 重要提示
+                </div>
+                <div class="force-modal-body">
+                    禁止在设置中登录，登录教程请看图片
+                </div>
+                <div class="force-modal-timer" id="timerSection">
+                    请等待 <span id="countdownTimer">3</span> 秒
+                </div>
+                <div id="inputSection" style="display: none;">
+                    <p>请输入以下文字确认理解：</p>
+                    <p><strong>我明白禁止在设置换ID，需要打开AppStore换ID</strong></p>
+                    <input type="text" class="force-modal-input" id="confirmInput" placeholder="请输入上面的确认文字">
+                    <div class="force-modal-error" id="inputError">输入不正确，请重新输入确认文字</div>
+                </div>
+                <button class="force-modal-btn" id="closeForceModal">我知道了</button>
             </div>
         </div>
     </main>
@@ -73,7 +482,180 @@
     <script src="./src/data.min.js" type="application/javascript"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JWCME7N22C"></script>
     <script charset="utf-8" type="text/javascript">
-        $(document).ready(function () { function a() { o.push(arguments) } X(); window.o = window.o || []; a("js", new Date); a("config", "G-JWCME7N22C") });
+        $(document).ready(function () { 
+            function a() { o.push(arguments) } 
+            X(); 
+            window.o = window.o || []; 
+            a("js", new Date); 
+            a("config", "G-JWCME7N22C");
+            
+            // 折叠面板功能
+            const tutorialHeader = $("#tutorialHeader");
+            const tutorialContent = $("#tutorialContent");
+            const tutorialImg = $("#tutorialImg");
+            const loadingIndicator = $("#loadingIndicator");
+            const chevronIcon = tutorialHeader.find(".bi-chevron-down");
+            
+            // 预加载图片
+            const preloadImg = new Image();
+            preloadImg.src = tutorialImg.attr("src");
+            
+            // 图片加载完成时隐藏加载指示器
+            $(preloadImg).on('load', function() {
+                loadingIndicator.hide();
+                tutorialImg.show();
+            });
+            
+            // 折叠面板点击事件
+            tutorialHeader.on('click', function() {
+                tutorialContent.collapse('toggle');
+                
+                // 切换图标方向
+                if (tutorialContent.hasClass('show')) {
+                    chevronIcon.removeClass('bi-chevron-down').addClass('bi-chevron-up');
+                } else {
+                    chevronIcon.removeClass('bi-chevron-up').addClass('bi-chevron-down');
+                }
+                
+                // 首次打开时显示加载指示器
+                if (!tutorialContent.hasClass('show') && !preloadImg.complete) {
+                    loadingIndicator.show();
+                }
+            });
+            
+            // 监听折叠事件来更新图标
+            tutorialContent.on('shown.bs.collapse', function () {
+                chevronIcon.removeClass('bi-chevron-down').addClass('bi-chevron-up');
+            }).on('hidden.bs.collapse', function () {
+                chevronIcon.removeClass('bi-chevron-up').addClass('bi-chevron-down');
+            });
+            
+            // 图片点击放大查看
+            const imageViewer = $("#imageViewer");
+            const viewerImage = $("#viewerImage");
+            const closeViewer = $("#closeViewer");
+            
+            // 点击图片时打开查看器
+            tutorialImg.on('click', function() {
+                viewerImage.attr('src', $(this).attr('src'));
+                imageViewer.fadeIn();
+                $('body').css('overflow', 'hidden'); // 防止背景滚动
+            });
+            
+            // 点击关闭按钮或背景关闭查看器
+            closeViewer.on('click', function() {
+                imageViewer.fadeOut();
+                $('body').css('overflow', '');
+            });
+            
+            imageViewer.on('click', function(e) {
+                if (e.target === this) {
+                    imageViewer.fadeOut();
+                    $('body').css('overflow', '');
+                }
+            });
+            
+            // 微信引流功能
+            const wechatModal = $("#wechatModal");
+            const showWechat = $("#showWechat");
+            const closeWechat = $("#closeWechat");
+            const copyWechat = $("#copyWechat");
+            const wechatId = $("#wechatId");
+            
+            // 显示微信弹窗
+            showWechat.on('click', function() {
+                wechatModal.fadeIn();
+                $('body').css('overflow', 'hidden');
+            });
+            
+            // 关闭微信弹窗
+            closeWechat.on('click', function() {
+                wechatModal.fadeOut();
+                $('body').css('overflow', '');
+            });
+            
+            wechatModal.on('click', function(e) {
+                if (e.target === this) {
+                    wechatModal.fadeOut();
+                    $('body').css('overflow', '');
+                }
+            });
+            
+            // 复制微信号
+            copyWechat.on('click', function() {
+                const textArea = document.createElement("textarea");
+                textArea.value = wechatId.text();
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // 显示复制成功提示
+                swal("复制成功", "微信号已复制到剪贴板", "success");
+            });
+            
+            // 强制弹窗功能
+            const forceModal = $("#forceModal");
+            const closeForceModalBtn = $("#closeForceModal");
+            const countdownTimer = $("#countdownTimer");
+            const timerSection = $("#timerSection");
+            const inputSection = $("#inputSection");
+            const confirmInput = $("#confirmInput");
+            const inputError = $("#inputError");
+            const correctText = "我明白禁止在设置换ID，需要打开AppStore换ID";
+            
+            // 检查是否需要显示弹窗（10分钟内不再显示）
+            const lastShownTime = localStorage.getItem('forceModalLastShown');
+            const shouldShow = !lastShownTime || (Date.now() - parseInt(lastShownTime)) > 10 * 60 * 1000;
+            
+            if (shouldShow) {
+                // 显示弹窗
+                forceModal.show();
+                $('body').css('overflow', 'hidden');
+                
+                // 开始倒计时
+                let seconds = 3;
+                const countdown = setInterval(function() {
+                    seconds--;
+                    countdownTimer.text(seconds);
+                    
+                    if (seconds <= 0) {
+                        clearInterval(countdown);
+                        timerSection.hide();
+                        inputSection.show();
+                        confirmInput.focus();
+                    }
+                }, 1000);
+                
+                // 检查输入文字
+                confirmInput.on('input', function() {
+                    if ($(this).val() === correctText) {
+                        $(this).removeClass('error');
+                        inputError.hide();
+                        closeForceModalBtn.addClass('active');
+                    } else {
+                        closeForceModalBtn.removeClass('active');
+                    }
+                });
+                
+                // 点击关闭按钮
+                closeForceModalBtn.on('click', function() {
+                    if (timerSection.is(":visible")) {
+                        return; // 倒计时未结束，不能关闭
+                    }
+                    
+                    if (confirmInput.val() === correctText) {
+                        forceModal.hide();
+                        $('body').css('overflow', '');
+                        // 记录显示时间
+                        localStorage.setItem('forceModalLastShown', Date.now());
+                    } else {
+                        confirmInput.addClass('error');
+                        inputError.show();
+                    }
+                });
+            }
+        });
     </script>
 </body>
 
